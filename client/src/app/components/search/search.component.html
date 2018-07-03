@@ -1,0 +1,51 @@
+<h2>Twitter Sentiment Analytics</h2>
+<p>You can use our app to get the mood of twitter about anything.
+  <br/> All you had to do is just search. We got it all covered!!!
+  <br/>
+</p>
+<form>
+  <br>
+  <br>
+  <table align="center" style="padding-top:300px;">
+    <tr>
+      <td colspan="2" align="center">
+        <input id="hashtags" class="btn btn-outline-primary" type="text" [(ngModel)]="searchquery" [ngModelOptions]="{standalone: true}">
+      </td>
+      <td>&nbsp;</td>
+      <td colspan="2" align="center">
+        <button type="button" class="btn btn-primary" (click)="searchcall()">Search Hashtags</button>
+      </td>
+    </tr>
+  </table>
+
+  <!-- <div *ngIf="headers && _headers.length ==0">
+      {{statusMessage}}
+    </div>
+    <div *ngIf="tweetsdata && tweetsdata.length ==0">
+      {{statusMessage}}
+    </div> -->
+  <br>
+  <legend align="center">
+    <div [ngBusy]="{busy: busy, message: 'Loading...', backdrop: false, delay: 200, minDuration: 600}"></div>
+  </legend>
+
+  <div align="left" *ngIf="chart" align="center">
+    <canvas id="myChart" width="50" height="300"></canvas>
+  </div>
+  <br>
+  <div class="row-fluid row ">
+    <div *ngFor="let item of tweetsdata" class="col-md-3">
+      <div class="card border-primary mb-3" style="max-width: 20rem;">
+        <div class="card-header">Score: 
+            <span *ngIf ="item.sentiment.score < 0" class="badge badge-danger">{{item.sentiment.score}}</span>
+            <span *ngIf ="item.sentiment.score > 0" class="badge badge-success">{{item.sentiment.score}}</span>
+            <span *ngIf ="item.sentiment.score == 0" class="badge badge-secondary">{{item.sentiment.score}}</span>
+        </div>
+        <div class="card-body">
+          <h4 class="card-title text-white">@{{item.tweet.user.screen_name}}</h4>
+          <p class="card-text">{{item.tweet.text}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
